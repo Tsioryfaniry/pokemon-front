@@ -1,9 +1,9 @@
 import React from "react";
 // import { Form, Link } from "react-router-dom";
-import Heading from "../../components/heading/Heading";
-import Input from "../../components/input/Input";
+import Heading from "../../components/general/heading/Heading";
+import Input from "../../components/form/input/Input";
 import style from "./signup.module.scss";
-import Button from "../../components/button/Button";
+import Button from "../../components/common/button/Button";
 
 export default function SignUp() {
   const items = [
