@@ -1,8 +1,8 @@
 // import { Form } from "react-router-dom";
 // import Heading from "@/components/heading/Heading";
-import Heading from "../../components/heading/Heading";
-import Button from "../../components/button/Button";
-import Input from "../../components/input/Input";
+import Heading from "../../components/general/heading/Heading";
+import Button from "../../components/common/button/Button";
+import Input from "../../components/form/input/Input";
 import style from "./login.module.scss";
 // function action(){
 
