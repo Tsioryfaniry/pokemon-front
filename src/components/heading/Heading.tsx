@@ -12,13 +12,13 @@ export default function Heading({variant="h3",component:Component="div",theme="b
   let variantStyle:string =""
   switch (variant) {
     case "h1":
-        variantStyle="text-6xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-red-500"        
+        variantStyle="pt-8 text-6xl font-bold text-center leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white"        
         break; 
     case "h2":
-            variantStyle="text-5xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-red-500"        
+            variantStyle="text-5xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white text-center"        
             break;
     case "h3":
-            variantStyle="text-4xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-red-500"        
+            variantStyle="text-4xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white"        
             break;
     case "h4":
             variantStyle="text-3xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-red-500"        
