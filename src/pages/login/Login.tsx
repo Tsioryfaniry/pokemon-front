@@ -15,21 +15,23 @@ export default function Login() {
     { type: "text", label: "Password", placeholder: "password" },
     { type: "text", label: "Confirm password", placeholder: "password" },
   ];
-  const Items = items.map((item) => (
-    <Input
-      key={item.label}
-      type={item.type}
-      placeholder={item.placeholder}
-      label={item.label}
-    />
-  ));
+
   return (
-    <div className="max-w-sm m-auto pt-4">
-      <Heading>Login</Heading>
-      <form className="max-w-sm mx-auto pt-4" action="/login">
-        {Items}
-        <Button txt="Login" />
-      </form>
-    </div>
+    <>
+      <div className="max-w-sm m-auto pt-4">
+        <Heading>Login</Heading>
+        <form className="max-w-sm mx-auto pt-4" action="/login">
+          {items.map((item) => (
+            <Input
+              key={item.label}
+              type={item.type}
+              placeholder={item.placeholder}
+              label={item.label}
+            />
+          ))}
+          <Button txt="Login" />
+        </form>
+      </div>
+    </>
   );
 }
