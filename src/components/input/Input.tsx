@@ -1,6 +1,13 @@
-import { InputProps } from "../../interface/interface";
 import style from "./input.module.scss";
-export default function Input({ placeholder, label, type }: InputProps) {
+
+interface InputProps {
+  type?: string;
+  placeholder?: string;
+  label?: string;
+}
+
+export default function Input(props: InputProps) {
+  const { type, placeholder, label } = props;
   return (
     <>
       <div className="mb-5 flex flex-col">
