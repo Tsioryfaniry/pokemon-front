@@ -11,10 +11,10 @@ export default function Input(props: InputProps) {
   return (
     <>
       <div className="mb-5 flex flex-col">
-        <label className={style.input}>{label}</label>
+        <label className={style.label}>{label}</label>
         <input
           type={type}
-          className={style.label}
+          className={style.input}
           placeholder={placeholder}
           required
         />
