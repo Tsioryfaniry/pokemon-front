@@ -1,0 +1,5 @@
+.card__list {
+  @apply grid grid-cols-5;
+  gap: 30px;
+  padding: 30px 50px;
+}
