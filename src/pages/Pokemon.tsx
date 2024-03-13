@@ -13,6 +13,7 @@ export default function Pokemon() {
 
   return (
     <>
+      <p></p>
       {items.map((item) => {
         <CardPokemon
           key={item.name}

@@ -1,5 +1,6 @@
 .input {
-    @apply block mb-2 text-sm font-medium text-gray-900 text-white pl-2;
+    @apply block mb-2 text-sm font-medium text-gray-900 text-black pl-2;
+    outline: none;
     height: 35px;
     border-radius: 10px;
 }
