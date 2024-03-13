@@ -3,6 +3,7 @@ import React from "react";
 import Heading from "../../components/heading/Heading";
 import Input from "../../components/input/Input";
 import style from "./signup.module.scss";
+import Button from "../../components/button/Button";
 
 export default function SignUp() {
   const items = [
@@ -27,9 +28,7 @@ export default function SignUp() {
 
       <form action="/signup" method="post" className="max-w-sm mx-auto pt-4">
         {Items}
-        <button type="submit" className={style.button}>
-          Register new account
-        </button>
+        <Button txt="Rgister now" />
       </form>
     </>
   );

@@ -1,5 +1,6 @@
 // import { Form } from "react-router-dom";
 // import Heading from "@/components/heading/Heading";
+import Button from "../../components/button/Button";
 import Input from "../../components/input/Input";
 import style from "./login.module.scss";
 // function action(){
@@ -26,6 +27,7 @@ export default function Login() {
       {/* <Heading>Login</Heading> */}
       <form className="max-w-sm mx-auto pt-4" action="/login">
         {Items}
+        <Button txt="Login" />
       </form>
     </div>
   );
