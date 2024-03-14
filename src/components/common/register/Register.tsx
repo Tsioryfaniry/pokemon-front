@@ -4,7 +4,7 @@ import Button from "../button/Button";
 
 interface RegisterProps {
   children: ReactNode;
-  onSubmit?: (e: FormEvent<HTMLInputElement>) => void;
+  onSubmit?: (e: any) => void;
   title: string;
 }
 

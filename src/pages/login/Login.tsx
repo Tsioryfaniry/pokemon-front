@@ -3,7 +3,8 @@
 import Input from "../../components/form/input/Input";
 import Register from "../../components/common/register/Register";
 import { FormEvent, useState } from "react";
-import LoginUser from "../../service/login";
+import UserService from "../../service/login";
+import { useNavigate } from "react-router-dom";
 // function action(){
 
 // }
@@ -11,6 +12,7 @@ import LoginUser from "../../service/login";
 export default function Login() {
   const [username, setUsername] = useState<string>("");
   const [pasword, setPassword] = useState<string>("");
+  const navigate = useNavigate();
   const handleChangeUsername = (e: React.FormEvent<HTMLInputElement>) => {
     setUsername(e.currentTarget.value);
   };
@@ -25,8 +27,9 @@ export default function Login() {
       password: pasword,
     };
     try {
-      const res = await LoginUser.userLogin(data);
+      const res = await UserService.login(data);
       localStorage.setItem("token", res.data.token);
+      navigate("/type");
     } catch (e) {
       console.error(e);
     }
