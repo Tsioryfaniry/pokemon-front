@@ -1,9 +1,7 @@
-import React from "react";
 // import { Form, Link } from "react-router-dom";
-import Heading from "../../components/general/heading/Heading";
+
 import Input from "../../components/form/input/Input";
-import style from "./signup.module.scss";
-import Button from "../../components/common/button/Button";
+import Register from "../../components/common/register/Register";
 
 export default function SignUp() {
   const items = [
@@ -22,14 +20,7 @@ export default function SignUp() {
   ));
   return (
     <>
-      <Heading component="h1" variant="h1" className="text-center">
-        Sign up
-      </Heading>
-
-      <form action="/signup" method="post" className="max-w-sm mx-auto pt-4">
-        {Items}
-        <Button txt="Rgister now" />
-      </form>
+      <Register title="Sign Up">{Items}</Register>
     </>
   );
 }
