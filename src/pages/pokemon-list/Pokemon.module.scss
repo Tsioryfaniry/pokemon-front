@@ -1,0 +1,5 @@
+.pokemon__list {
+  @apply grid grid-cols-4;
+  padding: 50px 30px;
+  gap: 20px;
+}

@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import CardType from "../../components/display/card/CardType";
 import styles from "./Type.module.scss";
-import Pokemon from "../Pokemon";
 
 interface TypeListData {
   src: string;

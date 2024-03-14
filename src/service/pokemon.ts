@@ -1,7 +1,7 @@
 import Http from "./http";
 
-export default class Pokemon extends Http {
-  static async pokemonList() {
+export default class PokemonService extends Http {
+  static async getList() {
     try {
       return await this.get("/api/pokemon");
     } catch (e) {

@@ -16,7 +16,7 @@ export default function Register(props: RegisterProps) {
       <h2>{title}</h2>
       <form action="" onSubmit={onSubmit} className={styles.form}>
         {children}
-        <Button txt={title} type="submit" loader={loader} />
+        <Button label={title} type="submit" loader={loader} />
       </form>
     </div>
   );

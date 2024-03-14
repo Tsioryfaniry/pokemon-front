@@ -3,6 +3,7 @@ import Layout from "../layout/Layout";
 import { createBrowserRouter } from "react-router-dom";
 import SignUp from "../pages/signup/SignUp";
 import Login from "../pages/login/Login";
+import Pokemon from "../pages/pokemon-list/Pokemon";
 
 export const router = createBrowserRouter([
   {
@@ -20,6 +21,10 @@ export const router = createBrowserRouter([
       {
         path: "login",
         element: <Login />,
+      },
+      {
+        path: "pokemon",
+        element: <Pokemon />,
       },
     ],
   },

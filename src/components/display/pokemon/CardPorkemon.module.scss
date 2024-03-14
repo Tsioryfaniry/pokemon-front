@@ -1,0 +1,23 @@
+.card {
+  @apply w-full;
+  img {
+    @apply w-full;
+    aspect-ratio: 1;
+  }
+  &__body {
+    @apply flex flex-col;
+    gap: 10px;
+  }
+  &__info {
+    padding-inline: 10px;
+    padding-top: 10px;
+    p {
+      font-size: 20px;
+      color: #ffffff;
+    }
+  }
+  &__btn {
+    @apply flex items-center;
+    gap: 10px;
+  }
+}
