@@ -1,36 +1,52 @@
 // import { Form } from "react-router-dom";
-// import Heading from "@/components/heading/Heading";
-import Heading from "../../components/general/heading/Heading";
-import Button from "../../components/common/button/Button";
+
 import Input from "../../components/form/input/Input";
-import style from "./login.module.scss";
+import Register from "../../components/common/register/Register";
+import { FormEvent, useState } from "react";
+import LoginUser from "../../service/login";
 // function action(){
 
 // }
 
 export default function Login() {
-  const items = [
-    { type: "text", label: "your email", placeholder: "your email" },
-    { type: "text", label: "your email", placeholder: "phone number" },
-    { type: "text", label: "Password", placeholder: "password" },
-    { type: "text", label: "Confirm password", placeholder: "password" },
-  ];
+  const [username, setUsername] = useState<string>("");
+  const [pasword, setPassword] = useState<string>("");
+  const handleChangeUsername = (e: React.FormEvent<HTMLInputElement>) => {
+    setUsername(e.currentTarget.value);
+  };
+  const handleChangePassword = (e: React.FormEvent<HTMLInputElement>) => {
+    setPassword(e.currentTarget.value);
+  };
+
+  const handleSubmit = async (e: FormEvent<HTMLInputElement>) => {
+    e.preventDefault();
+    const data = {
+      username: username,
+      password: pasword,
+    };
+    try {
+      const res = await LoginUser.userLogin(data);
+      localStorage.setItem("token", res.data.token);
+    } catch (e) {
+      console.error(e);
+    }
+  };
 
   return (
     <>
-      <div className="max-w-sm m-auto pt-4">
-        <Heading>Login</Heading>
-        <form className="max-w-sm mx-auto pt-4" action="/login">
-          {items.map((item) => (
-            <Input
-              key={item.label}
-              type={item.type}
-              placeholder={item.placeholder}
-              label={item.label}
-            />
-          ))}
-          <Button txt="Login" />
-        </form>
+      <div>
+        <Register title="Login" onSubmit={handleSubmit}>
+          <Input
+            placeholder="username"
+            type="text"
+            onChange={handleChangeUsername}
+          />
+          <Input
+            placeholder="password"
+            type="password"
+            onChange={handleChangePassword}
+          />
+        </Register>
       </div>
     </>
   );

@@ -1,12 +1,13 @@
-import style from "./Button.module.scss";
+import styles from "./Button.module.scss";
 interface ButtonProps {
   txt: string;
+  type?: "button" | "submit";
 }
 export default function Button(props: ButtonProps) {
-  const { txt } = props;
+  const { txt, type = "button" } = props;
   return (
-    <div>
-      <button type="submit" className={style.button}>
+    <div className={styles.button__wrap}>
+      <button type={type} className={styles.button}>
         {txt}
       </button>
     </div>
