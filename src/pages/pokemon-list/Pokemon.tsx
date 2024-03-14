@@ -42,6 +42,11 @@ export default function Pokemon() {
     setListData(res.data.data);
     setIsLoadingSelect(false);
   };
+  const getReleaseData = async () => {
+    const res = await PokemonService.releaseList();
+    setListData(res.data.data);
+    setIsLoadingSelect(false);
+  };
 
   const handleSelectPage = async (e: Event) => {
     const target = e.target as HTMLSelectElement;
@@ -59,6 +64,9 @@ export default function Pokemon() {
   const handleCatch = async (id: number) => {
     const res = await PokemonService.catch(id);
   };
+  const handleRelease = async (id: number) => {
+    const res = await PokemonService.release(id);
+  };
 
   const handleGetCatchList = async () => {
     setIsLoadingSelect(true);
@@ -71,19 +79,34 @@ export default function Pokemon() {
       throw e;
     }
   };
+  const handleGetReleaseList = async () => {
+    setIsLoadingSelect(true);
+    navigate("/pokemon?type=release");
+
+    try {
+      getReleaseData();
+    } catch (e) {
+      setIsLoadingSelect(false);
+      throw e;
+    }
+  };
 
   useEffect(() => {
     setIsLoading(true);
     setIsLoadingSelect(true);
 
-    const catchParams = params[0].get("type");
-    if (!catchParams) {
+    const paramsType = params[0].get("type");
+
+    if (paramsType === "catch") {
+      getCatchData();
+      setIsLoading(false);
+    } else if (paramsType === "release") {
+      getReleaseData();
+      setIsLoading(false);
+    } else {
       getSelectData(params[0].get("page")!);
       setCurrentPage(params[0].get("page")!);
       getData();
-    } else {
-      getCatchData();
-      setIsLoading(false);
     }
   }, []);
 
@@ -101,7 +124,11 @@ export default function Pokemon() {
               variant={"primary"}
               onClick={handleGetCatchList}
             />
-            <Button label="Release" variant={"danger"} />
+            <Button
+              label="Release"
+              variant={"danger"}
+              onClick={handleGetReleaseList}
+            />
             <p>page : </p>
             <div className={styles.select__wrap}>
               <select
@@ -133,6 +160,7 @@ export default function Pokemon() {
                   catche={true}
                   release={false}
                   onCatch={() => handleCatch(id + 1)}
+                  onRelease={() => handleRelease(id + 1)}
                   src={item.sprites.other.dream_world.front_default}
                 />
               ))}

@@ -26,9 +26,25 @@ export default class PokemonService extends Http {
       throw e;
     }
   }
+  static async releaseList() {
+    try {
+      return await this.get("/api/pokemon/list?filter=release");
+    } catch (e) {
+      console.error("get pokemon realese", e);
+      throw e;
+    }
+  }
   static async catch(id: number) {
     try {
       return await this.post(`/api/pokemon/catch/${id}`, {});
+    } catch (e) {
+      console.error("get pokemon catch", e);
+      throw e;
+    }
+  }
+  static async release(id: number) {
+    try {
+      return await this.post(`/api/pokemon/release/${id}`, {});
     } catch (e) {
       console.error("get pokemon catch", e);
       throw e;
