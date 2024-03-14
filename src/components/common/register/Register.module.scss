@@ -1,0 +1,13 @@
+.register {
+  @apply mx-auto h-screen flex items-center flex-col justify-center;
+  max-width: 600px;
+  h2 {
+    @apply text-center;
+    font-size: 30px;
+    font-weight: 600;
+    color: #ffffff;
+  }
+}
+.form {
+  @apply w-full;
+}
