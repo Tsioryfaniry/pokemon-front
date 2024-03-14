@@ -17,6 +17,7 @@ export default function Pokemon() {
   const [pageCount, setPageCount] = useState<number[]>([]);
   const [currentPage, setCurrentPage] = useState<string>("");
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [isLoadingSelect, setIsLoadingSelect] = useState<boolean>(false);
   const navigate = useNavigate();
   const params = useSearchParams();
 
@@ -33,13 +34,13 @@ export default function Pokemon() {
   const getSelectData = async (id: number | string) => {
     const res = await PokemonService.getListPerPage(id);
     setListData(res.data.results);
-    setIsLoading(false);
+    setIsLoadingSelect(false);
   };
 
   const handleSelectPage = async (e: Event) => {
     const target = e.target as HTMLSelectElement;
     navigate(`/pokemon?page=${target.value}`);
-    setIsLoading(true);
+    setIsLoadingSelect(true);
 
     try {
       getSelectData(target.value);
@@ -51,6 +52,7 @@ export default function Pokemon() {
 
   useEffect(() => {
     setIsLoading(true);
+    setIsLoadingSelect(true);
     getSelectData(params[0].get("page")!);
     setCurrentPage(params[0].get("page")!);
     getData();
@@ -85,17 +87,23 @@ export default function Pokemon() {
               <IconsChevronDown />
             </div>
           </div>
-          <div className={styles.pokemon__list}>
-            {listData.map((item) => (
-              <CardPokemon
-                key={item.name}
-                name={item.name}
-                catche={true}
-                release={false}
-                src={item.sprites.other.dream_world.front_default}
-              />
-            ))}
-          </div>
+          {isLoadingSelect ? (
+            <div className={styles.pokemon__loader_select}>
+              <Loader size={60} />
+            </div>
+          ) : (
+            <div className={styles.pokemon__list}>
+              {listData.map((item) => (
+                <CardPokemon
+                  key={item.name}
+                  name={item.name}
+                  catche={true}
+                  release={false}
+                  src={item.sprites.other.dream_world.front_default}
+                />
+              ))}
+            </div>
+          )}
         </div>
       )}
     </>

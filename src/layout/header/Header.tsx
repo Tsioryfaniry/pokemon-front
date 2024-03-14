@@ -14,7 +14,7 @@ export default function Header() {
         <nav className={styles.nav}>
           <Link to="type">Type</Link>
           <Link to="pokemon">pokemon</Link>
-          <Link to="pokemon">Cateory</Link>
+          <Link to="pokemon">Category</Link>
         </nav>
         <div className={styles.header__register}>
           <Link to="login">Login</Link>
