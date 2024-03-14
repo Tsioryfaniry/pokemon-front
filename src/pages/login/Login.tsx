@@ -12,6 +12,8 @@ import { useNavigate } from "react-router-dom";
 export default function Login() {
   const [username, setUsername] = useState<string>("");
   const [pasword, setPassword] = useState<string>("");
+  const [loading, setLoading] = useState<boolean>(false);
+
   const navigate = useNavigate();
   const handleChangeUsername = (e: React.FormEvent<HTMLInputElement>) => {
     setUsername(e.currentTarget.value);
@@ -22,23 +24,27 @@ export default function Login() {
 
   const handleSubmit = async (e: FormEvent<HTMLInputElement>) => {
     e.preventDefault();
+
     const data = {
       username: username,
       password: pasword,
     };
+    setLoading(true);
     try {
       const res = await UserService.login(data);
       localStorage.setItem("token", res.data.token);
+      setLoading(true);
       navigate("/type");
     } catch (e) {
       console.error(e);
+      setLoading(true);
     }
   };
 
   return (
     <>
       <div>
-        <Register title="Login" onSubmit={handleSubmit}>
+        <Register title="Login" onSubmit={handleSubmit} loader={loading}>
           <Input
             placeholder="username"
             type="text"
