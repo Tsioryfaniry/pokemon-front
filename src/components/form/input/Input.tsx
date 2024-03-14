@@ -1,4 +1,4 @@
-import style from "./input.module.scss";
+import style from "./Input.module.scss";
 
 interface InputProps {
   type?: string;
