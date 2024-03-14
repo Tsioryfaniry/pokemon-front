@@ -4,20 +4,21 @@ interface PokeProps {
   name?: string;
   catche?: boolean;
   release?: boolean;
+  src: string;
   onCatch?: () => void;
   onRelease?: () => void;
 }
 export default function CardPokemon(props: PokeProps) {
-  const { name, release, catche, onRelease, onCatch } = props;
+  const { name, release, catche, src, onRelease, onCatch } = props;
   return (
     <>
       <div className={style.card}>
-        <img src="../../../public/downloa.jpeg" alt="poke" />
+        <div className={style.card__img}>
+          <img src={src} className={style.card__frame} />
+        </div>
         <div className={style.card__body}>
           <div className={style.card__info}>
             <p>{name}</p>
-            {/* <p>{indice}</p>
-          <p>{langage}</p> */}
           </div>
           <div className={style.card__btn}>
             <Button

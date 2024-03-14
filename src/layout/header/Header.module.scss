@@ -1,0 +1,29 @@
+.header {
+  @apply flex items-center justify-between bg-white;
+  height: 60px;
+  padding: 20px 50px;
+  h4 {
+    font-size: 28px;
+    color: #000;
+  }
+  &__register {
+    @apply flex items-center;
+    gap: 30px;
+    a,
+    span {
+      color: #000;
+      font-size: 18px;
+    }
+  }
+  &__log {
+    @apply cursor-pointer;
+  }
+}
+
+.nav {
+  @apply flex;
+  gap: 10px;
+  a {
+    color: #000;
+  }
+}

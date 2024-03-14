@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import UserService from "../service/login";
 import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import styles from "./Layout.module.scss";
-import Header from "../pages/header/Header";
+import Header from "./header/Header";
 
 export default function Layout() {
   const navigate = useNavigate();
@@ -15,7 +15,7 @@ export default function Layout() {
       if (!token || token === "") {
         return;
       } else {
-        return navigate("/type");
+        return navigate("/pokemon");
       }
     }
 

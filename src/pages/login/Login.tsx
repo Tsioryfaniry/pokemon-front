@@ -34,7 +34,7 @@ export default function Login() {
       const res = await UserService.login(data);
       localStorage.setItem("token", res.data.token);
       setLoading(true);
-      navigate("/type");
+      navigate("/pokemon");
     } catch (e) {
       console.error(e);
       setLoading(true);
