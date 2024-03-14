@@ -7,6 +7,9 @@ axios.interceptors.request.use((config: InternalAxiosRequestConfig) => {
   }
   return config;
 });
+axios.create({
+  baseURL: import.meta.env.APP_BASE_URL,
+});
 
 export default class Http {
   static async get(url: string) {
