@@ -5,7 +5,7 @@ interface PokeProps {
   catche?: boolean;
   release?: boolean;
   src: string;
-  onCatch?: () => void;
+  onCatch?: any;
   onRelease?: () => void;
 }
 export default function CardPokemon(props: PokeProps) {
@@ -24,12 +24,12 @@ export default function CardPokemon(props: PokeProps) {
             <Button
               label="Catch"
               variant={catche ? "primary" : "disable"}
-              onClick={onRelease}
+              onClick={onCatch}
             />
             <Button
               label="Release"
               variant={release ? "danger" : "disable"}
-              onClick={onCatch}
+              onClick={onRelease}
             />
           </div>
         </div>

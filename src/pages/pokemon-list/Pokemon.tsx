@@ -37,6 +37,12 @@ export default function Pokemon() {
     setIsLoadingSelect(false);
   };
 
+  const getCatchData = async () => {
+    const res = await PokemonService.catcheList();
+    setListData(res.data.data);
+    setIsLoadingSelect(false);
+  };
+
   const handleSelectPage = async (e: Event) => {
     const target = e.target as HTMLSelectElement;
     navigate(`/pokemon?page=${target.value}`);
@@ -50,12 +56,35 @@ export default function Pokemon() {
     }
   };
 
+  const handleCatch = async (id: number) => {
+    const res = await PokemonService.catch(id);
+  };
+
+  const handleGetCatchList = async () => {
+    setIsLoadingSelect(true);
+    navigate("/pokemon?type=catch");
+
+    try {
+      getCatchData();
+    } catch (e) {
+      setIsLoadingSelect(false);
+      throw e;
+    }
+  };
+
   useEffect(() => {
     setIsLoading(true);
     setIsLoadingSelect(true);
-    getSelectData(params[0].get("page")!);
-    setCurrentPage(params[0].get("page")!);
-    getData();
+
+    const catchParams = params[0].get("type");
+    if (!catchParams) {
+      getSelectData(params[0].get("page")!);
+      setCurrentPage(params[0].get("page")!);
+      getData();
+    } else {
+      getCatchData();
+      setIsLoading(false);
+    }
   }, []);
 
   return (
@@ -67,7 +96,11 @@ export default function Pokemon() {
       ) : (
         <div className={styles.pokemon__list__wrap}>
           <div className={styles.pokemon__heading}>
-            <Button label="Catch" variant={"primary"} />
+            <Button
+              label="Catch"
+              variant={"primary"}
+              onClick={handleGetCatchList}
+            />
             <Button label="Release" variant={"danger"} />
             <p>page : </p>
             <div className={styles.select__wrap}>
@@ -93,12 +126,13 @@ export default function Pokemon() {
             </div>
           ) : (
             <div className={styles.pokemon__list}>
-              {listData.map((item) => (
+              {listData.map((item, id) => (
                 <CardPokemon
-                  key={item.name}
+                  key={id}
                   name={item.name}
                   catche={true}
                   release={false}
+                  onCatch={() => handleCatch(id + 1)}
                   src={item.sprites.other.dream_world.front_default}
                 />
               ))}
