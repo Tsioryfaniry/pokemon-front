@@ -6,16 +6,17 @@ interface RegisterProps {
   children: ReactNode;
   onSubmit?: (e: any) => void;
   title: string;
+  loader?: boolean;
 }
 
 export default function Register(props: RegisterProps) {
-  const { children, onSubmit, title } = props;
+  const { children, onSubmit, title, loader } = props;
   return (
     <div className={styles.register}>
       <h2>{title}</h2>
       <form action="" onSubmit={onSubmit} className={styles.form}>
         {children}
-        <Button txt={title} type="submit" />
+        <Button txt={title} type="submit" loader={loader} />
       </form>
     </div>
   );
