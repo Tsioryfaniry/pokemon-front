@@ -30,17 +30,20 @@ export default function Pokemon() {
     const res = await PokemonService.getList();
     setListData(res.data.data.results);
     setIsLoading(false);
+    setIsLoadingSelect(false);
   };
 
   const getSelectData = async (id: number | string) => {
     const res = await PokemonService.getListPerPage(id);
     setListData(res.data.results);
+    setIsLoading(false);
     setIsLoadingSelect(false);
   };
 
   const getCatchData = async () => {
     const res = await PokemonService.catcheList();
     setListData(res.data.data);
+    setIsLoading(false);
     setIsLoadingSelect(false);
   };
 
@@ -75,6 +78,7 @@ export default function Pokemon() {
     try {
       getCatchData();
     } catch (e) {
+      setIsLoading(false);
       setIsLoadingSelect(false);
       throw e;
     }
@@ -95,6 +99,7 @@ export default function Pokemon() {
   const getSearchData = async (value: string) => {
     const res = await PokemonService.search(value);
     setListData([res.data]);
+    setIsLoading(false);
     setIsLoadingSelect(false);
   };
   const handleSearch = async (e: any) => {
@@ -105,6 +110,7 @@ export default function Pokemon() {
       navigate(`/pokemon?search=${inputSearchValue}`);
     } catch (e) {
       console.error(e);
+      setIsLoading(false);
       setIsLoadingSelect(false);
 
       throw e;
