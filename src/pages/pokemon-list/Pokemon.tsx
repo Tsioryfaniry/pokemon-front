@@ -26,6 +26,7 @@ export default function Pokemon() {
   const params = useSearchParams();
 
   const getData = async () => {
+    setIsLoading(true);
     const res = await PokemonService.getList();
     setListData(res.data.data.results);
     setIsLoading(false);
@@ -94,8 +95,6 @@ export default function Pokemon() {
   const getSearchData = async (value: string) => {
     const res = await PokemonService.search(value);
     setListData([res.data]);
-    console.log([res.data]);
-
     setIsLoadingSelect(false);
   };
   const handleSearch = async (e: any) => {
@@ -127,15 +126,12 @@ export default function Pokemon() {
 
     if (paramsType === "catch") {
       getCatchData();
-      setIsLoading(false);
     } else if (paramsSearch) {
-      console.log(paramsSearch);
       setIsLoadingSelect(true);
-      setIsLoading(false);
       getSearchData(paramsSearch);
     } else {
-      setIsLoading(false);
-      setIsLoadingSelect(false);
+      setIsLoading(true);
+      setIsLoadingSelect(true);
       getSelectData(params[0].get("page")!);
       setCurrentPage(params[0].get("page")!);
       getData();
