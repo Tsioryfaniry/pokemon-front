@@ -2,8 +2,9 @@
   @apply mx-auto h-screen flex items-center flex-col justify-center;
   max-width: 600px;
   h2 {
-    @apply text-center;
-    font-size: 30px;
+    @apply text-center uppercase;
+    font-size: 40px;
+    margin-bottom: 40px;
     font-weight: 600;
     color: #ffffff;
   }

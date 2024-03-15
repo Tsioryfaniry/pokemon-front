@@ -1,18 +1,15 @@
-// import { Form } from "react-router-dom";
-
 import Input from "../../components/form/input/Input";
 import Register from "../../components/common/register/Register";
 import { FormEvent, useState } from "react";
 import UserService from "../../service/login";
 import { useNavigate } from "react-router-dom";
-// function action(){
-
-// }
+import styles from "./login.module.scss";
 
 export default function Login() {
   const [username, setUsername] = useState<string>("");
   const [pasword, setPassword] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
+  const [error, setError] = useState<boolean>(false);
 
   const navigate = useNavigate();
   const handleChangeUsername = (e: React.FormEvent<HTMLInputElement>) => {
@@ -30,14 +27,15 @@ export default function Login() {
       password: pasword,
     };
     setLoading(true);
+    setError(false);
     try {
       const res = await UserService.login(data);
       localStorage.setItem("token", res.data.token);
       setLoading(true);
       navigate("/pokemon");
     } catch (e) {
-      console.error(e);
-      setLoading(true);
+      setError(true);
+      setLoading(false);
     }
   };
 
@@ -55,6 +53,7 @@ export default function Login() {
             type="password"
             onChange={handleChangePassword}
           />
+          {error && <p className={styles.error}>Error login</p>}
         </Register>
       </div>
     </>

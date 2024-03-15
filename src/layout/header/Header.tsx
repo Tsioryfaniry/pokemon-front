@@ -12,9 +12,8 @@ export default function Header() {
       <header className={styles.header}>
         <h4>Pokemon</h4>
         <nav className={styles.nav}>
-          <Link to="type">Type</Link>
-          <Link to="pokemon">pokemon</Link>
-          <Link to="pokemon">Category</Link>
+          <Link to="type">List type</Link>
+          <Link to="pokemon"> List pokemon</Link>
         </nav>
         <div className={styles.header__register}>
           <Link to="login">Login</Link>

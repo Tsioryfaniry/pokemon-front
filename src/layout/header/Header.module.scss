@@ -22,8 +22,12 @@
 
 .nav {
   @apply flex;
-  gap: 10px;
+  gap: 20px;
   a {
     color: #000;
+    font-size: 28px;
+    &:hover {
+      @apply text-blue-500;
+    }
   }
 }
