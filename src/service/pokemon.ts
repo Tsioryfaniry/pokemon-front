@@ -38,7 +38,7 @@ export default class PokemonService extends Http {
     try {
       return await this.post(`/api/pokemon/catch/${id}`, {});
     } catch (e) {
-      console.error("get pokemon catch", e);
+      console.error("catch pokemon catch", e);
       throw e;
     }
   }
@@ -46,7 +46,15 @@ export default class PokemonService extends Http {
     try {
       return await this.post(`/api/pokemon/release/${id}`, {});
     } catch (e) {
-      console.error("get pokemon catch", e);
+      console.error("release pokemon catch", e);
+      throw e;
+    }
+  }
+  static async search(name: string) {
+    try {
+      return await this.get(`/api/pokemon/search?query=${name}`);
+    } catch (e) {
+      console.error("search pokemon ", e);
       throw e;
     }
   }

@@ -7,9 +7,13 @@
 }
 .pokemon {
   &__heading {
-    @apply flex items-center justify-end;
+    @apply flex items-center justify-between;
     gap: 20px;
     margin-bottom: 40px;
+  }
+  &__filter {
+    @apply flex items-center;
+    gap: 20px;
     p {
       font-size: 18px;
       font-weight: 600;

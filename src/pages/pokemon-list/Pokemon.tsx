@@ -6,18 +6,22 @@ import IconsChevronDown from "../../components/icon/IconsChevronDown";
 import PokemonService from "../../service/pokemon";
 import Button from "../../components/common/button/Button";
 import Loader from "../../components/general/loader/Loader";
+import InputSearch from "../../components/form/inputSearch/InputSearch";
 
 interface ListDataType {
   name: string;
   url: string;
   sprites: any;
+  isCatched: boolean;
 }
 export default function Pokemon() {
   const [listData, setListData] = useState<ListDataType[]>([]);
   const [pageCount, setPageCount] = useState<number[]>([]);
   const [currentPage, setCurrentPage] = useState<string>("");
   const [isLoading, setIsLoading] = useState<boolean>(false);
+
   const [isLoadingSelect, setIsLoadingSelect] = useState<boolean>(false);
+  const [inputSearchValue, setInputSearchValue] = useState<string>("");
   const navigate = useNavigate();
   const params = useSearchParams();
 
@@ -26,6 +30,7 @@ export default function Pokemon() {
     setListData(res.data.data.results);
     setIsLoading(false);
     const lengthPage = res.data.data.count / 20;
+
     for (let i = 1; i < lengthPage; i++) {
       setPageCount((prevState: any) => [...prevState, i]);
     }
@@ -65,7 +70,7 @@ export default function Pokemon() {
     const res = await PokemonService.catch(id);
   };
   const handleRelease = async (id: number) => {
-    const res = await PokemonService.release(id);
+    const res = await PokemonService.catch(id);
   };
 
   const handleGetCatchList = async () => {
@@ -84,9 +89,31 @@ export default function Pokemon() {
     navigate("/pokemon?type=release");
 
     try {
-      getReleaseData();
+      getData();
+      setIsLoadingSelect(false);
     } catch (e) {
       setIsLoadingSelect(false);
+      throw e;
+    }
+  };
+
+  const getSearchData = async (value: string) => {
+    const res = await PokemonService.search(value);
+    setListData([res.data]);
+    console.log([res.data]);
+
+    setIsLoadingSelect(false);
+  };
+  const handleSearch = async (e: any) => {
+    e.preventDefault();
+    setIsLoadingSelect(true);
+    try {
+      getSearchData(inputSearchValue);
+      navigate(`/pokemon?search=${inputSearchValue}`);
+    } catch (e) {
+      console.error(e);
+      setIsLoadingSelect(false);
+
       throw e;
     }
   };
@@ -96,17 +123,23 @@ export default function Pokemon() {
     setIsLoadingSelect(true);
 
     const paramsType = params[0].get("type");
+    const paramsSearch = params[0].get("search");
 
     if (paramsType === "catch") {
+      getData();
       getCatchData();
       setIsLoading(false);
-    } else if (paramsType === "release") {
-      getReleaseData();
-      setIsLoading(false);
     } else {
+      setIsLoading(false);
+      setIsLoadingSelect(false);
       getSelectData(params[0].get("page")!);
       setCurrentPage(params[0].get("page")!);
       getData();
+    }
+
+    if (paramsSearch) {
+      console.log(paramsSearch);
+      getSearchData(paramsSearch);
     }
   }, []);
 
@@ -119,32 +152,38 @@ export default function Pokemon() {
       ) : (
         <div className={styles.pokemon__list__wrap}>
           <div className={styles.pokemon__heading}>
-            <Button
-              label="Catch"
-              variant={"primary"}
-              onClick={handleGetCatchList}
+            <InputSearch
+              setInputValue={setInputSearchValue}
+              onSubmit={handleSearch}
             />
-            <Button
-              label="Release"
-              variant={"danger"}
-              onClick={handleGetReleaseList}
-            />
-            <p>page : </p>
-            <div className={styles.select__wrap}>
-              <select
-                name=""
-                id=""
-                value={currentPage}
-                className={styles.select}
-                onChange={handleSelectPage}
-              >
-                {pageCount.map((item, id) => (
-                  <option value={item} key={`id-${id}`}>
-                    {item}
-                  </option>
-                ))}
-              </select>
-              <IconsChevronDown />
+            <div className={styles.pokemon__filter}>
+              <Button
+                label="Catch"
+                variant={"primary"}
+                onClick={handleGetCatchList}
+              />
+              <Button
+                label="Release"
+                variant={"danger"}
+                onClick={handleGetReleaseList}
+              />
+              <p>page : </p>
+              <div className={styles.select__wrap}>
+                <select
+                  name=""
+                  id=""
+                  value={currentPage}
+                  className={styles.select}
+                  onChange={handleSelectPage}
+                >
+                  {pageCount.map((item, id) => (
+                    <option value={item} key={`id-${id}`}>
+                      {item}
+                    </option>
+                  ))}
+                </select>
+                <IconsChevronDown />
+              </div>
             </div>
           </div>
           {isLoadingSelect ? (
@@ -157,8 +196,8 @@ export default function Pokemon() {
                 <CardPokemon
                   key={id}
                   name={item.name}
-                  catche={true}
-                  release={false}
+                  catche={item.isCatched}
+                  release={!item.isCatched}
                   onCatch={() => handleCatch(id + 1)}
                   onRelease={() => handleRelease(id + 1)}
                   src={item.sprites.other.dream_world.front_default}

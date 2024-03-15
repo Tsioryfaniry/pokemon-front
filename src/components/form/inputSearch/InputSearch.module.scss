@@ -1,0 +1,23 @@
+.search {
+  @apply mx-auto ml-0;
+  width: 40%;
+  &__input {
+    @apply grid grid-cols-4 items-center;
+    input,
+    button {
+      height: 50px;
+    }
+    input {
+      @apply col-span-3 outline-none;
+      padding-inline: 10px;
+      border-radius: 5px 0 0 5px;
+    }
+    button {
+      @apply bg-blue-500 w-full;
+      padding-inline: 10px;
+      font-size: 18px;
+      color: #fff;
+      border-radius: 0 5px 5px 0;
+    }
+  }
+}
