@@ -13,6 +13,7 @@ interface ListDataType {
   url: string;
   sprites: any;
   isCatched: boolean;
+  id: number;
 }
 export default function Pokemon() {
   const [listData, setListData] = useState<ListDataType[]>([]);
@@ -199,8 +200,8 @@ export default function Pokemon() {
                   name={item.name}
                   catche={item.isCatched}
                   release={!item.isCatched}
-                  onCatch={() => handleCatch(id + 1)}
-                  onRelease={() => handleRelease(id + 1)}
+                  onCatch={() => handleCatch(item.id)}
+                  onRelease={() => handleRelease(item.id)}
                   src={item.sprites.other.dream_world.front_default}
                 />
               ))}
