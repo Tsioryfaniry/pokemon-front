@@ -7,7 +7,7 @@ import styles from "./login.module.scss";
 
 export default function Login() {
   const [username, setUsername] = useState<string>("");
-  const [pasword, setPassword] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<boolean>(false);
 
@@ -24,15 +24,19 @@ export default function Login() {
 
     const data = {
       username: username,
-      password: pasword,
+      password: password,
     };
     setLoading(true);
     setError(false);
     try {
-      const res = await UserService.login(data);
-      localStorage.setItem("token", res.data.token);
-      setLoading(true);
-      navigate("/pokemon");
+      if (username === "" || password === "") {
+        setError(true);
+      } else {
+        const res = await UserService.login(data);
+        localStorage.setItem("token", res.data.token);
+        setLoading(false);
+        navigate("/pokemon");
+      }
     } catch (e) {
       setError(true);
       setLoading(false);
