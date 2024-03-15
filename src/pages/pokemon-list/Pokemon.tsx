@@ -29,11 +29,6 @@ export default function Pokemon() {
     const res = await PokemonService.getList();
     setListData(res.data.data.results);
     setIsLoading(false);
-    const lengthPage = res.data.data.count / 20;
-
-    for (let i = 1; i < lengthPage; i++) {
-      setPageCount((prevState: any) => [...prevState, i]);
-    }
   };
 
   const getSelectData = async (id: number | string) => {
@@ -44,11 +39,6 @@ export default function Pokemon() {
 
   const getCatchData = async () => {
     const res = await PokemonService.catcheList();
-    setListData(res.data.data);
-    setIsLoadingSelect(false);
-  };
-  const getReleaseData = async () => {
-    const res = await PokemonService.releaseList();
     setListData(res.data.data);
     setIsLoadingSelect(false);
   };
@@ -67,10 +57,14 @@ export default function Pokemon() {
   };
 
   const handleCatch = async (id: number) => {
+    setIsLoadingSelect(true);
     const res = await PokemonService.catch(id);
+    getCatchData();
   };
   const handleRelease = async (id: number) => {
-    const res = await PokemonService.catch(id);
+    setIsLoadingSelect(true);
+    const res = await PokemonService.release(id);
+    getCatchData();
   };
 
   const handleGetCatchList = async () => {
@@ -125,21 +119,26 @@ export default function Pokemon() {
     const paramsType = params[0].get("type");
     const paramsSearch = params[0].get("search");
 
+    const lengthPage = 1302 / 20;
+
+    for (let i = 1; i < lengthPage; i++) {
+      setPageCount((prevState: any) => [...prevState, i]);
+    }
+
     if (paramsType === "catch") {
-      getData();
       getCatchData();
       setIsLoading(false);
+    } else if (paramsSearch) {
+      console.log(paramsSearch);
+      setIsLoadingSelect(true);
+      setIsLoading(false);
+      getSearchData(paramsSearch);
     } else {
       setIsLoading(false);
       setIsLoadingSelect(false);
       getSelectData(params[0].get("page")!);
       setCurrentPage(params[0].get("page")!);
       getData();
-    }
-
-    if (paramsSearch) {
-      console.log(paramsSearch);
-      getSearchData(paramsSearch);
     }
   }, []);
 

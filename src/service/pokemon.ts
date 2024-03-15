@@ -9,6 +9,24 @@ export default class PokemonService extends Http {
       throw e;
     }
   }
+  static async getListType() {
+    try {
+      const res = await this.get(`/api/pokemon/type`);
+      return res.data;
+    } catch (e) {
+      console.error("get pokemon type", e);
+      throw e;
+    }
+  }
+  static async getItemType(id: string | number) {
+    try {
+      const res = await this.get(`/api/pokemon/type/${id}`);
+      return res.data;
+    } catch (e) {
+      console.error("get pokemon type", e);
+      throw e;
+    }
+  }
   static async getListPerPage(pageNumber: number | string) {
     try {
       const res = await this.get(`/api/pokemon?page=${pageNumber}`);

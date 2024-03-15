@@ -1,23 +1,12 @@
 .card {
   &__img {
-    @apply w-full bg-gray-300;
+    @apply w-full bg-black flex items-center justify-center;
     aspect-ratio: 1 / 1;
     border-radius: 30px;
-    img {
-      @apply w-full h-full;
-      border-radius: 30px;
-    }
-  }
-  &__body {
-    @apply flex flex-col;
-    gap: 10px;
-    padding-top: 10px;
     h3 {
+      @apply text-center;
       font-size: 24px;
-    }
-    p {
-      font-size: 16px;
-      color: #525151;
+      color: #fff;
     }
   }
 }
