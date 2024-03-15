@@ -4,11 +4,12 @@ interface InputProps {
   type?: string;
   placeholder?: string;
   label?: string;
+  value?: string;
   onChange?: (e: React.FormEvent<HTMLInputElement>) => void;
 }
 
 export default function Input(props: InputProps) {
-  const { type = "text", placeholder, label, onChange } = props;
+  const { type = "text", placeholder, label, onChange, value } = props;
   return (
     <>
       <div className="mb-5 flex flex-col">
@@ -19,6 +20,7 @@ export default function Input(props: InputProps) {
           placeholder={placeholder}
           onChange={onChange}
           required
+          value={value}
         />
       </div>
     </>
