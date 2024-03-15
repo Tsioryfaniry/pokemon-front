@@ -55,10 +55,8 @@ export default function Type() {
         <div className="card__list">
           {lisData.map((item, id) => (
             <CardType
-              src={item.src}
               name={item.name}
               onClicke={() => handleClick(id, item.name)}
-              count={item.itemCount}
               key={`id-${id}`}
             />
           ))}
