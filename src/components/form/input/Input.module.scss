@@ -1,0 +1,13 @@
+.input {
+  @apply block mb-2 text-sm font-medium text-gray-900 text-black pl-2;
+  outline: none;
+  height: 40px;
+  border-radius: 10px;
+  &::placeholder {
+    font-weight: 500;
+  }
+}
+
+.label {
+  @apply mb-2 text-white;
+}

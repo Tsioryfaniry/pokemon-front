@@ -1,0 +1,13 @@
+.btn {
+  &--primary {
+    @apply bg-blue-500;
+  }
+  &--danger {
+    @apply bg-red-500;
+  }
+  &--disable {
+    @apply pointer-events-none;
+    background-color: #999996;
+    cursor: not-allowed;
+  }
+}

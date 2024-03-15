@@ -1,0 +1,12 @@
+.card {
+  &__img {
+    @apply w-full bg-black flex items-center justify-center;
+    aspect-ratio: 1 / 1;
+    border-radius: 30px;
+    h3 {
+      @apply text-center;
+      font-size: 24px;
+      color: #fff;
+    }
+  }
+}
