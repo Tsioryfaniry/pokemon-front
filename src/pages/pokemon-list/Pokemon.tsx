@@ -124,6 +124,7 @@ export default function Pokemon() {
 
     const paramsType = params[0].get("type");
     const paramsSearch = params[0].get("search");
+    const paramsPage = params[0].get("page");
 
     const lengthPage = 1302 / 20;
 
@@ -136,11 +137,12 @@ export default function Pokemon() {
     } else if (paramsSearch) {
       setIsLoadingSelect(true);
       getSearchData(paramsSearch);
-    } else {
-      setIsLoading(true);
+    } else if (paramsPage) {
       setIsLoadingSelect(true);
       getSelectData(params[0].get("page")!);
       setCurrentPage(params[0].get("page")!);
+    } else {
+      setIsLoading(true);
       getData();
     }
   }, []);
