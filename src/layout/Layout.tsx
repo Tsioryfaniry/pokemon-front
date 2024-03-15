@@ -36,7 +36,7 @@ export default function Layout() {
   }, [location]);
   return (
     <div className={styles.container}>
-      <Header />
+      {!location.pathname.includes("login" || "signup") && <Header />}
       <Outlet />
     </div>
   );
