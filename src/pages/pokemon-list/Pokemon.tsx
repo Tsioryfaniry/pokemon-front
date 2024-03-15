@@ -27,7 +27,6 @@ export default function Pokemon() {
   const params = useSearchParams();
 
   const getData = async () => {
-    setIsLoading(true);
     const res = await PokemonService.getList();
     setListData(res.data.data.results);
     setIsLoading(false);
@@ -64,12 +63,12 @@ export default function Pokemon() {
   const handleCatch = async (id: number) => {
     setIsLoadingSelect(true);
     const res = await PokemonService.catch(id);
-    getCatchData();
+    getData();
   };
   const handleRelease = async (id: number) => {
     setIsLoadingSelect(true);
     const res = await PokemonService.release(id);
-    getCatchData();
+    getData();
   };
 
   const handleGetCatchList = async () => {
@@ -91,8 +90,11 @@ export default function Pokemon() {
     try {
       getData();
       setIsLoadingSelect(false);
+      setIsLoading(false);
     } catch (e) {
       setIsLoadingSelect(false);
+      setIsLoading(false);
+
       throw e;
     }
   };
@@ -200,8 +202,8 @@ export default function Pokemon() {
                 <CardPokemon
                   key={id}
                   name={item.name}
-                  catche={item.isCatched}
-                  release={!item.isCatched}
+                  catche={!item.isCatched}
+                  release={item.isCatched}
                   onCatch={() => handleCatch(item.id)}
                   onRelease={() => handleRelease(item.id)}
                   src={item.sprites.other.dream_world.front_default}

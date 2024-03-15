@@ -10,7 +10,7 @@ import clsx from "clsx";
 
 export default function SignUp() {
   const [username, setUsername] = useState<string>("");
-  const [email, setemail] = useState<string>("");
+  const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [confirmpasssword, setConfirmpasssword] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
@@ -22,7 +22,7 @@ export default function SignUp() {
     setUsername(e.currentTarget.value);
   };
   const handleChangeEmail = (e: React.FormEvent<HTMLInputElement>) => {
-    setemail(e.currentTarget.value);
+    setEmail(e.currentTarget.value);
   };
   const handleChangePassword = (e: React.FormEvent<HTMLInputElement>) => {
     setPassword(e.currentTarget.value);
@@ -42,21 +42,26 @@ export default function SignUp() {
       email: email,
       password: password,
     };
-    if (password === confirmpasssword) {
-      setError(false);
-      if (username !== "" && email !== "" && password !== "") {
+    if (username !== "" && email !== "" && password !== "") {
+      if (password === confirmpasssword) {
+        setError(false);
         try {
           const res = await UserService.signup(data);
           localStorage.setItem("token", res.data.token);
-          setLoading(true);
+          setLoading(false);
           navigate("/type");
         } catch (e) {
           console.error(e);
-          setLoading(true);
+          setLoading(false);
         }
+      } else {
+        setError(true);
+        setLoading(false);
+        console.log("test");
       }
     } else {
       setError(true);
+      setLoading(false);
     }
   };
   return (
@@ -67,32 +72,26 @@ export default function SignUp() {
           label="Full name"
           placeholder="full name"
           onChange={handleChangename}
-          value="Rasoa"
         />
         <Input
           type="text"
           label="your email"
           placeholder="email"
           onChange={handleChangeEmail}
-          value="rasoa@gmail.com"
         />
         <Input
           type="password"
           label="Password"
           placeholder="password"
           onChange={handleChangePassword}
-          value="ddd"
         />
         <Input
           type="password"
           label="Confirm password"
           placeholder="confirm password"
           onChange={handleChangeConfrimePassword}
-          value="ddd"
         />
-        {error && (
-          <h2 className={style.error}> Verifier votre mot de passe </h2>
-        )}
+        {error && <h2 className={style.error}>Error </h2>}
       </Register>
     </>
   );

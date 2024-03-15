@@ -11,7 +11,7 @@ export default function Layout() {
 
   useEffect(() => {
     const token = localStorage.getItem("token");
-    if (location.pathname === "/login") {
+    if (location.pathname === "/login" || location.pathname === "/signup") {
       if (!token || token === "") {
         return;
       } else {
@@ -36,7 +36,7 @@ export default function Layout() {
   }, [location]);
   return (
     <div className={styles.container}>
-      <Header />
+      {!location.pathname.includes("login" || "signup") && <Header />}
       <Outlet />
     </div>
   );
