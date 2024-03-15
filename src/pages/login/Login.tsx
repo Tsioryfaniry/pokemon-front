@@ -4,6 +4,8 @@ import { FormEvent, useState } from "react";
 import UserService from "../../service/login";
 import { useNavigate } from "react-router-dom";
 import styles from "./login.module.scss";
+import Button from "../../components/common/button/Button";
+import { Link } from "react-router-dom";
 
 export default function Login() {
   const [username, setUsername] = useState<string>("");
@@ -58,6 +60,11 @@ export default function Login() {
             onChange={handleChangePassword}
           />
           {error && <p className={styles.error}>Error login</p>}
+          <div className={styles.link}>
+            <Link to="/signup" className={styles.signup}>
+              Créer un compte
+            </Link>
+          </div>
         </Register>
       </div>
     </>

@@ -1,5 +1,15 @@
 .error {
-  @apply text-center text-red-500;
-  font-size: 18px;
-  margin-bottom: 20px;
+    @apply text-center text-red-500;
+    font-size: 18px;
+    margin-bottom: 20px;
+}
+
+.link {
+    text-align: center;
+    padding-bottom: 20px;
+}
+
+.signup {
+    color: white;
+    text-align: center;
 }
